@@ -1,19 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import { deleteProject } from "../api/projects.api";
+import { useNavigate, redirect, Link } from "react-router-dom";
+import "./styles/ProjectCard.css";
 
-export function ProjectCard({project}) {
+export function ProjectCard({ project }) {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="project-card"
-      onClick={() => {
-        deleteProject(project.id, project)
-        navigate("/home");
-      }}
-    >
-      <h1>{project.name}</h1>
-      <p>{project.description}</p>
-    </div>
+    <Link className="project-link" to={project.website_url} target="_blank">
+      <div
+        className="project-card"
+      >
+        <div className="title">
+          <h1>{project.name.toUpperCase()}</h1>
+        </div>
+        <div className="description">
+          <h2>{project.description}</h2>
+        </div>
+      </div>
+    </Link>
   );
 }

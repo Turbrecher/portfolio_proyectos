@@ -1,6 +1,8 @@
 import { ProjectCard } from "./ProjectCard";
 import { useState, useEffect } from "react";
 import { getProjects } from "../api/projects.api";
+import { Nav } from "../components/Nav";
+import "./styles/ProjectList.css";
 
 export function ProjectList() {
   const [projects, setProjects] = useState([]);
@@ -9,6 +11,7 @@ export function ProjectList() {
     async function loadProjects() {
       const res = await getProjects();
       setProjects(res.data);
+      document.title = "PROJECTS - VICTOR'S PORTFOLIO";
     }
 
     loadProjects();
@@ -17,7 +20,8 @@ export function ProjectList() {
   return (
     projects && (
       <div className="project-list">
-        <h1>PROJECT LIST</h1>
+        <Nav />
+        <h1 id="page-title">MY PROJECTS</h1>
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
